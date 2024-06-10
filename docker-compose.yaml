@@ -1,0 +1,36 @@
+services:
+  twitch_drop_miner:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    image: twitch_drop_miner:localhost
+    container_name: twitch_drop_miner
+    restart: unless-stopped
+    volumes:
+      - ./data/tdm:/usr/src/app/data # cookies.jar, settings.json
+    networks:
+      - tdm
+    depends_on:
+      - novnc
+    environment:
+      - LOG_LEVEL=CALL # WARN, INFO, CALL, DEBUG
+      - DISPLAY=novnc:0.0
+
+  novnc:
+    image: theasp/novnc:latest
+    container_name: novnc
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    environment:
+      - DISPLAY_WIDTH=1024
+      - DISPLAY_HEIGHT=768
+      - RUN_XTERM=no
+      - RUN_FLUXBOX=yes
+    networks:
+      - tdm
+
+networks:
+  tdm:
+    driver: bridge
+    name: twitch_drop_miner_network

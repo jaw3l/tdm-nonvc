@@ -1,0 +1,6 @@
+data/
+tdm/settings.json
+tdm/cookies.jar
+tdm/log.txt
+tdm/cache
+tdm/lock.file
