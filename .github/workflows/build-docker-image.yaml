@@ -1,0 +1,15 @@
+name: Build TDM Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: docker build . --file docker/Dockerfile --tag tdm-novnc:$(date +%s)
