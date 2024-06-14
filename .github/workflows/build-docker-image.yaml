@@ -28,5 +28,8 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Tag Docker image
+      run: docker tag tdm-novnc:$(date +%s) ghcr.io/${{ github.repository }}/tdm-novnc:latest
+
     - name: Push to GitHub Container Registry
       run: docker push ghcr.io/${{ github.repository }}/tdm-novnc:latest
