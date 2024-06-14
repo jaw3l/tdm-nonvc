@@ -4,3 +4,5 @@ tdm/cookies.jar
 tdm/log.txt
 tdm/cache
 tdm/lock.file
+.secrets
+.env
