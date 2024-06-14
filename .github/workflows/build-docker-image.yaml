@@ -19,7 +19,7 @@ jobs:
 
     - name: Build
       working-directory: ${{ github.workspace }}
-      run: docker build . --file docker/Dockerfile --tag tdm-novnc:$(date +%s)
+      run: docker build . --file docker/Dockerfile --tag tdm-novnc:${{ github.sha }}
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
@@ -29,7 +29,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Tag Docker image
-      run: docker tag tdm-novnc:$(date +%s) ghcr.io/${{ github.repository }}/tdm-novnc:latest
+      run: docker tag tdm-novnc:${{ github.sha }} ghcr.io/${{ github.repository }}/tdm-novnc:latest
 
     - name: Push to GitHub Container Registry
       run: docker push ghcr.io/${{ github.repository }}/tdm-novnc:latest
