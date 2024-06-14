@@ -33,7 +33,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Tag Docker image
-      run: docker tag tdm-novnc:${{ github.sha }} ghcr.io/${{ github.repository }}/tdm-novnc:latest
+      run: docker tag tdm-novnc:${{ github.sha }} ghcr.io/${{ github.repository }}:latest
 
     - name: Push to GitHub Container Registry
-      run: docker push ghcr.io/${{ github.repository }}/tdm-novnc:latest
+      run: docker push ghcr.io/${{ github.repository }}:latest
