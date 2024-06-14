@@ -1,5 +1,8 @@
 FROM python:3.8
 
+LABEL org.opencontainers.image.source="https://github.com/jaw3l/tdm-nonvc"
+LABEL org.opencontainers.image.title="TDM-noVNC"
+
 WORKDIR /usr/src/app
 
 RUN apt-get update -y
