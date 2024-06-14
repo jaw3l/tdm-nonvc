@@ -19,4 +19,4 @@ jobs:
 
     - name: Build
       working-directory: ${{ github.workspace }}
-      run: docker build ${GITHUB_WORKSPACE} --file docker/Dockerfile --tag tdm-novnc:$(date +%s)
+      run: docker build . --file docker/Dockerfile --tag tdm-novnc:$(date +%s)
