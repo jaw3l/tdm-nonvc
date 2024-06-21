@@ -6,3 +6,4 @@ tdm/cache
 tdm/lock.file
 .secrets
 .env
+slim*

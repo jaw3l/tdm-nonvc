@@ -5,8 +5,7 @@ LABEL org.opencontainers.image.title="TDM-noVNC"
 
 WORKDIR /usr/src/app
 
-RUN apt-get update -y
-RUN apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y
 
 # Build dependencies needed for the TDM
 RUN apt-get install -y \
