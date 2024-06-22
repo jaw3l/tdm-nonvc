@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.8-slim
 
 LABEL org.opencontainers.image.source="https://github.com/jaw3l/tdm-nonvc"
 LABEL org.opencontainers.image.title="TDM-noVNC"
@@ -27,7 +27,7 @@ COPY ./tdm .
 COPY ./docker/entrypoint.sh /usr/bin
 RUN chmod +x /usr/bin/entrypoint.sh
 
-ENV DISPLAY=localhost:0.0
-ENV LOG_LEVEL=INFO
+ENV DISPLAY=localhost:0.0 \
+    LOG_LEVEL=INFO
 
 ENTRYPOINT [ "/usr/bin/entrypoint.sh" ]
