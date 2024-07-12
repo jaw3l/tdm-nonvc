@@ -9,9 +9,6 @@ This repository combines [Twitch Drop Miner](https://github.com/DevilXD/TwitchDr
 ```yaml
 services:
   twitch_drop_miner:
-    # build:
-    #   context: ./
-    #   dockerfile: ./docker/Dockerfile
     image: ghcr.io/jaw3l/tdm-nonvc:latest
     container_name: twitch_drop_miner
     restart: unless-stopped
