@@ -1,6 +1,6 @@
 # TDM-noVNC
 
-This repository combines [Twitch Drop Miner](https://github.com/DevilXD/TwitchDropsMiner) and [noVNC](https://github.com/theasp/docker-novnc) into a single docker-compose file.
+This repository combines [Twitch Drop Miner](https://github.com/DevilXD/TwitchDropsMiner) and [noVNC](https://github.com/novnc/noVNC) into a single container.
 
 ## Installation
 
@@ -18,29 +18,22 @@ services:
       - DISPLAY_WIDTH=1024
       - DISPLAY_HEIGHT=768
       - DISPLAY_DEPTH=16
-      - VNC_PORT=5900
       - NOVNC_PORT=8080
-      - LOG_LEVEL=CALL
+      - LOG_LEVEL=INFO
 ```
 
 ### Volumes
 
-You can import `cookies.jar` and `settings.json` from your previous instances. All you have to do is mount `/usr/src/app/data` to a folder and move files into that folder.
+It is possible to import `cookies.jar` and `settings.json` from your earlier instances. Simply mount `/usr/src/app/data` to a designated folder and transfer the files into that folder.
 
 ### Environment Variables
 
 #### TDM
 
-| Variable    | Description                                     | Default         |
-| ----------- | ----------------------------------------------- | --------------- |
-| `LOG_LEVEL` | Log level options: `WARN`,`INFO`,`CALL`,`DEBUG` | `INFO`          |
-| `DISPLAY`   | X Display name and screen                       | `localhost:0.0` |
-
-#### noVNC
-
-| Variable         | Description                     | Default |
-| ---------------- | ------------------------------- | ------- |
-| `DISPLAY_WIDTH`  | Display width                   | 1024    |
-| `DISPLAY_HEIGHT` | Display height                  | 768     |
-| `RUN_XTERM`      | Run xterm terminal on startup   | yes     |
-| `RUN_FLUXBOX`    | Run fluxbox desktop environment | yes     | 
+| Variable         | Description                                | Default |
+| ---------------- | ------------------------------------------ | ------- |
+| `DISPLAY_WIDTH`  | Display width                              | 1024    |
+| `DISPLAY_HEIGHT` | Display height                             | 768     |
+| `DISPLAY_DEPTH`  | Display bit depth                          | 16      |
+| `NOVNC_PORT`     | Run fluxbox desktop environment            | 8080    |
+| `LOG_LEVEL`      | Log level options: WARN, INFO, CALL, DEBUG | INFO    |
