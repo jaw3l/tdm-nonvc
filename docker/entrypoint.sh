@@ -60,7 +60,7 @@ fluxbox &
 x11vnc -xkb -forever -nopw -display :0 -listen localhost &
 
 # Start noVNC
-/usr/share/novnc/utils/launch.sh --vnc localhost:$VNC_PORT --listen $NOVNC_PORT &
+/usr/share/novnc/utils/novnc_proxy --vnc localhost:$VNC_PORT --listen $NOVNC_PORT &
 
 wait_for_novnc
 
