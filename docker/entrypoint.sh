@@ -46,4 +46,4 @@ fi
 
 tail -F $LOG_PATH &
 
-python main.py $VERBOSITY "$@" --log 2>&1 | tee $LOG_PATH
+python main.py "$VERBOSITY" "$@" --log 2>&1 | tee $LOG_PATH
