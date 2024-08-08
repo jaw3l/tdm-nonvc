@@ -14,32 +14,13 @@ services:
     restart: unless-stopped
     volumes:
       - ./data/tdm:/usr/src/app/data
-    networks:
-      - tdm
-    depends_on:
-      - novnc
-    environment:
-      - LOG_LEVEL=CALL
-      - DISPLAY=novnc:0.0
-
-  novnc:
-    image: theasp/novnc:latest
-    container_name: novnc
-    restart: unless-stopped
-    ports:
-      - 8080:8080
     environment:
       - DISPLAY_WIDTH=1024
       - DISPLAY_HEIGHT=768
-      - RUN_XTERM=no
-      - RUN_FLUXBOX=yes
-    networks:
-      - tdm
-
-networks:
-  tdm:
-    driver: bridge
-    name: twitch_drop_miner_network
+      - DISPLAY_DEPTH=16
+      - VNC_PORT=5900
+      - NOVNC_PORT=8080
+      - LOG_LEVEL=CALL
 ```
 
 ### Volumes
