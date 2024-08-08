@@ -42,6 +42,8 @@ COPY ./tdm .
 COPY ./docker/entrypoint.sh /usr/bin
 RUN chmod +x /usr/bin/entrypoint.sh
 
+COPY ./docker/fluxbox_init /root/.fluxbox/init
+
 ENV DISPLAY=:0 \
     VNC_PORT=5900 \
     NOVNC_PORT=8080 \

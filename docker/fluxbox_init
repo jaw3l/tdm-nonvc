@@ -1,0 +1,5 @@
+session.screen0.toolbar.visible: false
+session.screen0.slit.visible: false
+session.screen0.iconbar.mode: false
+session.screen0.window.focus.mode: MouseOver
+session.screen0.window.unfocus.mode: Ignore
