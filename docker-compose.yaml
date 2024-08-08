@@ -16,6 +16,5 @@ services:
       - DISPLAY_WIDTH=1024
       - DISPLAY_HEIGHT=768
       - DISPLAY_DEPTH=16
-      - VNC_PORT=5900
       - NOVNC_PORT=8080
       - LOG_LEVEL=CALL
