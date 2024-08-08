@@ -10,6 +10,11 @@ RUN apt-get update && apt-get upgrade -y
 # Build dependencies needed for the TDM
 RUN apt-get install -y \
     tk \
+    xvfb \
+    wget \
+    unzip \
+    x11vnc \
+    fluxbox \
     gtk+3.0 \
     pkg-config \
     python3-dev \
@@ -17,6 +22,14 @@ RUN apt-get install -y \
     libappindicator3-dev \
     libgirepository1.0-dev \
     libayatana-appindicator3-dev
+
+ENV NOVNC_VERSION="${NOVNC_VERSION:-latest}"
+RUN mkdir -p /usr/share/novnc && \
+    if [ "$NOVNC_VERSION" = "latest" ]; then \
+    wget -qO- https://github.com/novnc/noVNC/archive/refs/heads/master.tar.gz | tar xz --strip 1 -C /usr/share/novnc; \
+    else \
+    wget -qO- https://github.com/novnc/noVNC/archive/v$NOVNC_VERSION.tar.gz | tar xz --strip 1 -C /usr/share/novnc; \
+    fi
 
 # Copy the requirements.txt file and install Python dependencies
 COPY ./tdm/requirements.txt ./
@@ -28,7 +41,11 @@ COPY ./tdm .
 COPY ./docker/entrypoint.sh /usr/bin
 RUN chmod +x /usr/bin/entrypoint.sh
 
-ENV DISPLAY=localhost:0.0 \
+ENV DISPLAY=:0 \
+    VNC_PORT=5900 \
+    NOVNC_PORT=8080 \
     LOG_LEVEL=INFO
+
+EXPOSE $VNC_PORT $NOVNC_PORT
 
 ENTRYPOINT [ "/usr/bin/entrypoint.sh" ]
