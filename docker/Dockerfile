@@ -10,6 +10,7 @@ RUN apt-get update && apt-get upgrade -y
 # Build dependencies needed for the TDM
 RUN apt-get install -y \
     tk \
+    git \
     xvfb \
     wget \
     unzip \
@@ -46,6 +47,6 @@ ENV DISPLAY=:0 \
     NOVNC_PORT=8080 \
     LOG_LEVEL=INFO
 
-EXPOSE $VNC_PORT $NOVNC_PORT
+EXPOSE $NOVNC_PORT
 
 ENTRYPOINT [ "/usr/bin/entrypoint.sh" ]
