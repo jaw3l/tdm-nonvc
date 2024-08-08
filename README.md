@@ -12,8 +12,8 @@ services:
     image: ghcr.io/jaw3l/tdm-nonvc:latest
     container_name: twitch_drop_miner
     restart: unless-stopped
-	ports:
-		- "8080:8080"
+    ports:
+      - "8080:8080"
     volumes:
       - ./data/tdm:/usr/src/app/data
     environment:
