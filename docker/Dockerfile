@@ -9,6 +9,7 @@ RUN apt-get update && apt-get upgrade -y
 
 # Build dependencies needed for the TDM
 RUN apt-get install -y \
+    tk \
     gtk+3.0 \
     pkg-config \
     python3-dev \
