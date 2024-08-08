@@ -6,9 +6,14 @@ WORKING_DIR="/usr/src/app"
 COOKIES_PATH="${WORKING_DIR}/cookies.jar"
 SETTINGS_PATH="${WORKING_DIR}/settings.json"
 
-# Create symlinks for data files
-ln -s "${DATA_DIR}/cookies.jar" "${COOKIES_PATH}"
-ln -s "${DATA_DIR}/settings.json" "${SETTINGS_PATH}"
+# Create symlinks for data files only if they don't already exist
+if [ ! -e "${COOKIES_PATH}" ]; then
+  ln -s "${DATA_DIR}/cookies.jar" "${COOKIES_PATH}"
+fi
+
+if [ ! -e "${SETTINGS_PATH}" ]; then
+  ln -s "${DATA_DIR}/settings.json" "${SETTINGS_PATH}"
+fi
 
 # Set default values for environment variables
 : "${DISPLAY_WIDTH:=1024}"
