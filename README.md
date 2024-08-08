@@ -12,6 +12,8 @@ services:
     image: ghcr.io/jaw3l/tdm-nonvc:latest
     container_name: twitch_drop_miner
     restart: unless-stopped
+	ports:
+		- "8080:8080"
     volumes:
       - ./data/tdm:/usr/src/app/data
     environment:
@@ -21,6 +23,8 @@ services:
       - NOVNC_PORT=8080
       - LOG_LEVEL=INFO
 ```
+
+After initiating the Docker container, you may access the VNC interface by navigating to `https://localhost:8080/vnc.html`. If you want simpler VNC interface you may use `https://localhost:8080/vnc_lite.html`.
 
 ### Volumes
 
