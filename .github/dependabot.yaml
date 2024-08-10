@@ -4,7 +4,6 @@ updates:
   - package-ecosystem: "gitsubmodule"
     directory: "/"
     schedule:
-      day: "tuesday"
-      interval: "weekly"
-    reviewers:
-      - "jaw3l"
+      interval: "daily"
+    commit-message:
+      prefix: "[tdm] "
