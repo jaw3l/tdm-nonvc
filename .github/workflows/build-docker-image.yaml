@@ -3,6 +3,9 @@ name: Build TDM Docker Image
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - "/docker"
+      - "/tdm"
   pull_request:
     branches: [ "main" ]
 
