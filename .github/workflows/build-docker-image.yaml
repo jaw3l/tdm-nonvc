@@ -4,10 +4,13 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - "/docker"
-      - "/tdm"
+      - "docker/"
+      - "tdm/"
   pull_request:
     branches: [ "main" ]
+    paths:
+      - "docker/"
+      - "tdm/"
 
 jobs:
   build:
