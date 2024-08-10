@@ -1,5 +1,18 @@
 #!/bin/bash
 
+set -e
+set -u
+
+log() {
+  echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1"
+}
+
+handle_error() {
+  local exit_code=$?
+  log "Error occured in line $1 with exit code $exit_code"
+  exit $exit_code
+}
+
 # Define paths
 DATA_DIR="/usr/src/app/data"
 WORKING_DIR="/usr/src/app"
