@@ -21,6 +21,7 @@ RUN apt-get install -y \
     python3-dev \
     libcairo2-dev \
     libappindicator3-dev \
+    fonts-noto-color-emoji \
     libgirepository1.0-dev \
     libayatana-appindicator3-dev
 
