@@ -6,11 +6,15 @@ on:
     paths:
       - "docker/**"
       - "tdm/**"
+      - ".github/**"
+      - "!.github/ISSUE_TEMPLATE/**"
   pull_request:
     branches: [ "main" ]
     paths:
       - "docker/**"
       - "tdm/**"
+      - ".github/**"
+      - "!.github/ISSUE_TEMPLATE/**"
 
 jobs:
   build:
