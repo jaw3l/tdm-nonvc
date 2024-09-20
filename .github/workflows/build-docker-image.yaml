@@ -3,18 +3,12 @@ name: Build TDM Docker Image
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - "docker/**"
-      - "tdm/**"
-      - ".github/**"
-      - "!.github/ISSUE_TEMPLATE/**"
+    paths-ignore:
+      - ".github/ISSUE_TEMPLATE/**"
   pull_request:
     branches: [ "main" ]
-    paths:
-      - "docker/**"
-      - "tdm/**"
-      - ".github/**"
-      - "!.github/ISSUE_TEMPLATE/**"
+    paths-ignore:
+      - ".github/ISSUE_TEMPLATE/**"
 
 jobs:
   build:
