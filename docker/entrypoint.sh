@@ -13,6 +13,8 @@ handle_error() {
   exit $exit_code
 }
 
+trap 'handle_error $LINENO' ERR
+
 # Define paths
 DATA_DIR="/usr/src/app/data"
 WORKING_DIR="/usr/src/app"
@@ -21,7 +23,8 @@ SETTINGS_PATH="${WORKING_DIR}/settings.json"
 
 # Create symlinks for data files only if they don't already exist
 if [ ! -e "${COOKIES_PATH}" ]; then
-  ln -s "${DATA_DIR}/cookies.jar" "${COOKIES_PATH}"
+  log "Creating symlinks for cookies.jar"
+  ln -s "${DATA_DIR}/cookies.jar" "${COOKIES_PATH}" || { log "Failed to create symlink for cookies.jar"; exit 1; }
 fi
 
 if [ ! -e "${SETTINGS_PATH}" ]; then
