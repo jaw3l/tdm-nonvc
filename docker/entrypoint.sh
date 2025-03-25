@@ -24,7 +24,10 @@ SETTINGS_PATH="${WORKING_DIR}/settings.json"
 # Create symlinks for data files only if they don't already exist
 if [ ! -e "${COOKIES_PATH}" ]; then
   log "Creating symlinks for cookies.jar"
-  ln -s "${DATA_DIR}/cookies.jar" "${COOKIES_PATH}" || { log "Failed to create symlink for cookies.jar"; exit 1; }
+  ln -s "${DATA_DIR}/cookies.jar" "${COOKIES_PATH}" || {
+    log "Failed to create symlink for cookies.jar"
+    exit 1
+  }
 fi
 
 if [ ! -e "${SETTINGS_PATH}" ]; then
@@ -45,22 +48,22 @@ wait_for_novnc() {
 
 convert_log_level_to_verbosity() {
   case "$LOG_LEVEL" in
-    WARN)
-      echo "-v"
-      ;;
-    INFO)
-      echo "-vv"
-      ;;
-    CALL)
-      echo "-vvv"
-      ;;
-    DEBUG)
-      echo "-vvvv"
-      ;;
-    *)
-      echo "Invalid LOG_LEVEL: $LOG_LEVEL"
-      exit 1
-      ;;
+  WARN)
+    echo "-v"
+    ;;
+  INFO)
+    echo "-vv"
+    ;;
+  CALL)
+    echo "-vvv"
+    ;;
+  DEBUG)
+    echo "-vvvv"
+    ;;
+  *)
+    echo "Invalid LOG_LEVEL: $LOG_LEVEL"
+    exit 1
+    ;;
   esac
 }
 
@@ -76,7 +79,7 @@ fluxbox &
 x11vnc -xkb -forever -nopw -display :0 -listen localhost &
 
 # Start noVNC
-/usr/share/novnc/utils/novnc_proxy --vnc localhost:$VNC_PORT --listen $NOVNC_PORT --web /usr/share/novnc --file-only &
+/usr/share/novnc/utils/novnc_proxy --vnc localhost:"$VNC_PORT" --listen "$NOVNC_PORT" --web /usr/share/novnc --file-only &
 
 wait_for_novnc
 
@@ -88,4 +91,13 @@ fi
 
 tail -F $LOG_PATH &
 
-python main.py "$VERBOSITY" "$@" --log 2>&1 | tee $LOG_PATH
+while true; do
+  python main.py "$VERBOSITY" "$@" --log 2>&1 | tee $LOG_PATH | while read line; do
+    echo "$line"
+    if echo "$line" | grep -q "Application Terminated"; then
+      log "Detected error message. Restarting application..."
+      break
+    fi
+  done
+  sleep 5
+done
