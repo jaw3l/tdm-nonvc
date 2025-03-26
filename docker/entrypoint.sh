@@ -92,11 +92,11 @@ fi
 tail -F $LOG_PATH &
 
 while true; do
-  python main.py "$VERBOSITY" "$@" --log 2>&1 | tee $LOG_PATH | while read line; do
+  python main.py "$VERBOSITY" "$@" --log 2>&1 | tee $LOG_PATH | while read -r line; do
     echo "$line"
-    if echo "$line" | grep -q "Application Terminated"; then
+    if echo "$line" | grep -q "Websocket$$0$$ stopped."; then
       log "Detected error message. Restarting application..."
-      break
+      break 2
     fi
   done
   sleep 5
