@@ -92,12 +92,22 @@ fi
 tail -F $LOG_PATH &
 
 while true; do
-  python main.py "$VERBOSITY" "$@" --log 2>&1 | tee $LOG_PATH | while read -r line; do
-    echo "$line"
-    if echo "$line" | grep -q "Websocket$$0$$ stopped."; then
-      log "Detected error message. Restarting application..."
-      break 2
+  start_time=$(date +%s)
+  while true; do
+    python main.py "$VERBOSITY" "$@" --log 2>&1 | tee $LOG_PATH | while read -r line; do
+      echo "$line"
+      if echo "$line" | grep -q "Websocket$$0$$ stopped."; then
+        log "Detected error message. Restarting application..."
+        break 2
+      fi
+    done
+
+    current_time=$(date +%s)
+    elapsed_time=$((current_time - start_time))
+    if [ $elapsed_time -ge 21600 ]; then
+      log "6 hours elapsed. Restarting application..."
+      break
     fi
+    sleep 5
   done
-  sleep 5
 done
