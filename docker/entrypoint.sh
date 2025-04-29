@@ -96,7 +96,7 @@ while true; do
   while true; do
     python main.py "$VERBOSITY" "$@" --log 2>&1 | tee $LOG_PATH | while read -r line; do
       echo "$line"
-      if echo "$line" | grep -q "Websocket$$0$$ stopped."; then
+      if echo "$line" | grep -q -E '((Websocket)[[\]][0][[\]].?((connection problem)|(stopped)))'; then
         log "Detected error message. Restarting application..."
         break 2
       fi
