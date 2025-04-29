@@ -5,10 +5,9 @@ LABEL org.opencontainers.image.title="TDM-noVNC"
 
 WORKDIR /usr/src/app
 
-RUN apt-get update && apt-get upgrade -y
-
 # Build dependencies needed for the TDM
-RUN apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && \
+  apt-get install -y --no-install-recommends \
   tk \
   git \
   xvfb \
@@ -20,10 +19,12 @@ RUN apt-get install -y \
   pkg-config \
   python3-dev \
   libcairo2-dev \
+  build-essential \
   libappindicator3-dev \
   fonts-noto-color-emoji \
   libgirepository1.0-dev \
-  libayatana-appindicator3-dev
+  libayatana-appindicator3-dev && \
+  apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV NOVNC_VERSION="${NOVNC_VERSION:-latest}"
 RUN mkdir -p /usr/share/novnc && \
