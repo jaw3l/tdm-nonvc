@@ -13,7 +13,7 @@ services:
     container_name: twitch_drop_miner
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - 8080:8080
     volumes:
       - ./data/tdm:/usr/src/app/data
     environment:
@@ -24,11 +24,14 @@ services:
       - LOG_LEVEL=INFO
 ```
 
-After initiating the Docker container, you may access the VNC interface by navigating to `https://localhost:8080/vnc.html`. If you want simpler VNC interface you may use `https://localhost:8080/vnc_lite.html`.
+After initiating the Docker container, you may access the VNC interface by navigating to `https://localhost:8080/vnc.html`.
+
+If you want simpler VNC interface you may use `https://localhost:8080/vnc_lite.html`.
 
 ### Volumes
 
-It is possible to import `cookies.jar` and `settings.json` from your earlier instances. Simply mount `/usr/src/app/data` to a designated folder and transfer the files into that folder.
+It is possible to import `cookies.jar` and `settings.json` from your earlier instances.
+Simply mount `/usr/src/app/data` to a designated folder and transfer the files into that folder.
 
 ### Environment Variables
 
