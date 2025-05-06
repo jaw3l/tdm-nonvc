@@ -76,7 +76,7 @@ Xvfb :0 -screen 0 "${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH}" &
 fluxbox &
 
 # Start VNC server
-x11vnc -xkb -forever -nopw -display :0 -listen localhost &
+x11vnc -xkb -forever -nopw -display :0 -listen localhost -ncache 10 &
 
 # Start noVNC
 /usr/share/novnc/utils/novnc_proxy --vnc localhost:"$VNC_PORT" --listen "$NOVNC_PORT" --web /usr/share/novnc --file-only &
