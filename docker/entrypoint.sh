@@ -69,17 +69,24 @@ convert_log_level_to_verbosity() {
 
 VERBOSITY=$(convert_log_level_to_verbosity)
 
+# Define output redirection based on LOG_LEVEL
+if [ "$LOG_LEVEL" = "DEBUG" ]; then
+  OUTPUT_REDIRECT=""
+else
+  OUTPUT_REDIRECT=">/dev/null 2>&1"
+fi
+
 # Start Xvfb with the specified resolution
-Xvfb :0 -screen 0 "${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH}" &
+eval "Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH} ${OUTPUT_REDIRECT} &"
 
 # Start FluxBox window manager
-fluxbox &
+eval "fluxbox ${OUTPUT_REDIRECT} &"
 
 # Start VNC server
-x11vnc -xkb -forever -nopw -display :0 -listen localhost -ncache 10 &
+eval "x11vnc -xkb -forever -nopw -display :0 -listen localhost -ncache 10 ${OUTPUT_REDIRECT} &"
 
 # Start noVNC
-/usr/share/novnc/utils/novnc_proxy --vnc localhost:"$VNC_PORT" --listen "$NOVNC_PORT" --web /usr/share/novnc --file-only &
+eval "/usr/share/novnc/utils/novnc_proxy --vnc localhost:${VNC_PORT} --listen ${NOVNC_PORT} --web /usr/share/novnc --file-only ${OUTPUT_REDIRECT} &"
 
 wait_for_novnc
 
