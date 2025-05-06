@@ -109,6 +109,10 @@ while true; do
       fi
     done
 
+    exit_code=${PIPESTATUS[0]}
+    log "Application exited with code $exit_code. Restarting..."
+    sleep 5
+
     current_time=$(date +%s)
     elapsed_time=$((current_time - start_time))
     if [ $elapsed_time -ge 21600 ]; then
