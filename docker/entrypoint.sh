@@ -83,7 +83,7 @@ eval "Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH} ${OU
 eval "fluxbox ${OUTPUT_REDIRECT} &"
 
 # Start VNC server
-eval "x11vnc -xkb -forever -nopw -display :0 -listen localhost -ncache 10 ${OUTPUT_REDIRECT} &"
+eval "x11vnc -xkb -forever -nopw -display :0 -listen localhost ${OUTPUT_REDIRECT} &"
 
 # Start noVNC
 eval "/usr/share/novnc/utils/novnc_proxy --vnc localhost:${VNC_PORT} --listen ${NOVNC_PORT} --web /usr/share/novnc --file-only ${OUTPUT_REDIRECT} &"
