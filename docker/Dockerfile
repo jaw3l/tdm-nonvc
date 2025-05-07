@@ -44,7 +44,10 @@ COPY ./tdm .
 COPY ./docker/entrypoint.sh /usr/bin
 RUN chmod +x /usr/bin/entrypoint.sh
 
-COPY ./docker/fluxbox_init /root/.fluxbox/init
+COPY ./docker/fluxbox/init /root/.fluxbox/init
+COPY ./docker/fluxbox/keys_kiosk /root/.fluxbox/keys_kiosk
+COPY ./docker/fluxbox/menu_kiosk /root/.fluxbox/menu_kiosk
+COPY ./docker/fluxbox/apps /root/.fluxbox/apps
 
 ENV DISPLAY=:0 \
   VNC_PORT=5900 \

@@ -1,0 +1,7 @@
+[app] (title=.*Twitch Drops Miner v.*\(by DevilXD\))
+  [Deco] {NONE}
+  [Layer] {2}
+  [Fullscreen] {yes}
+  [Sticky] {yes}
+  [Tab] {no}
+[end]

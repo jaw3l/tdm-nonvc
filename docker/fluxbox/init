@@ -1,0 +1,14 @@
+session.screen0.toolbar.visible: false
+session.screen0.slit.visible: false
+session.screen0.tabs.on: none
+session.screen0.workspaces: 1
+session.screen0.workspaceNames: TDM
+session.screen0.focusModel: ClickToFocus
+session.screen0.autoRaise: false
+session.screen0.clickRaises: false
+session.screen0.fullMaximization: true
+session.screen0.focusNewWindows: true
+session.screen0.windowPlacement: RowSmartPlacement
+session.screen0.menuFile: ~/.fluxbox/menu_kiosk
+session.keyFile: ~/.fluxbox/keys_kiosk
+session.appsFile: ~/.fluxbox/apps
