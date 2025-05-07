@@ -44,3 +44,10 @@ Simply mount `/usr/src/app/data` to a designated folder and transfer the files i
 | `DISPLAY_DEPTH`  | Display bit depth                          | 16      |
 | `NOVNC_PORT`     | Run fluxbox desktop environment            | 8080    |
 | `LOG_LEVEL`      | Log level options: WARN, INFO, CALL, DEBUG | INFO    |
+
+## Troubleshoot
+
+If TDM gives an error, the application can be restarted by pressing `Right CTRL` (CTRL_R), then `.` (period).
+
+> [!NOTE]
+> Pressing the buttons at the same time does not trigger the restart.
