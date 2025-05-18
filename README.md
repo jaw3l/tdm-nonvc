@@ -26,7 +26,7 @@ services:
 
 After initiating the Docker container, you may access the VNC interface by navigating to `https://localhost:8080/vnc.html`.
 
-If you want simpler VNC interface you may use `https://localhost:8080/vnc_lite.html`.
+If you want simpler VNC interface you may use `https://localhost:8080/vnc_lite.html?scale=true`.
 
 ### Volumes
 
