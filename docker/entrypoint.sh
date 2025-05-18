@@ -23,7 +23,7 @@ SETTINGS_PATH="${WORKING_DIR}/settings.json"
 
 # Create symlinks for data files only if they don't already exist
 if [ ! -e "${COOKIES_PATH}" ]; then
-  log "Creating symlinks for cookies.jar"
+  log "Creating symlink for cookies.jar"
   ln -s "${DATA_DIR}/cookies.jar" "${COOKIES_PATH}" || {
     log "Failed to create symlink for cookies.jar"
     exit 1
@@ -31,7 +31,11 @@ if [ ! -e "${COOKIES_PATH}" ]; then
 fi
 
 if [ ! -e "${SETTINGS_PATH}" ]; then
-  ln -s "${DATA_DIR}/settings.json" "${SETTINGS_PATH}"
+  log "Creating symlink for settings.json"
+  ln -s "${DATA_DIR}/settings.json" "${SETTINGS_PATH}" || {
+    log "Failed to create symlink for settings.json"
+    exit 1
+  }
 fi
 
 # Set default values for environment variables
@@ -68,6 +72,13 @@ convert_log_level_to_verbosity() {
 }
 
 VERBOSITY=$(convert_log_level_to_verbosity)
+
+# Clean up any stale X lock file to allow restarts
+if [ -f /tmp/.X0-lock ]; then
+  log "Removing stale X lock file"
+  rm -f /tmp/.X0-lock
+  sleep 1
+fi
 
 # Define output redirection based on LOG_LEVEL
 if [ "$LOG_LEVEL" = "DEBUG" ]; then

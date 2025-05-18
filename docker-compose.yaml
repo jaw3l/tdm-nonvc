@@ -18,3 +18,4 @@ services:
       - DISPLAY_DEPTH=16
       - NOVNC_PORT=8080
       - LOG_LEVEL=CALL
+      #- TZ=America/New_York
