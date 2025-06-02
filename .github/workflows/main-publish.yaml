@@ -1,0 +1,19 @@
+name: Publish Image
+
+on:
+  push:
+    branches: ["main"]
+    paths-ignore:
+      - ".github/ISSUE_TEMPLATE/**"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    uses: ./.github/workflows/reusable-docker-build.yaml
+    with:
+      push: true
+      platforms: "linux/amd64,linux/arm64"
+    secrets: inherit
