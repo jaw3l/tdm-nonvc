@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/reusable-docker-build.yml
+    uses: ./.github/workflows/reusable-docker-build.yaml
     with:
       push: false
       platforms: "linux/amd64,linux/arm64"
