@@ -11,16 +11,10 @@ on:
         required: false
         type: string
         default: "linux/amd64,linux/arm64"
-    secrets:
-      registry-token:
-        required: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
       - uses: actions/checkout@v4
@@ -47,7 +41,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.registry-token || secrets.GITHUB_TOKEN }}
+          password: ${{ github.token }}
 
       - name: Build and Push
         uses: docker/build-push-action@v5
