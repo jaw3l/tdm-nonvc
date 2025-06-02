@@ -1,0 +1,13 @@
+name: Publish Image
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  publish:
+    uses: ./.github/workflows/reusable-docker-build.yml
+    with:
+      push: true
+      platforms: "linux/amd64,linux/arm64"
+    secrets: inherit

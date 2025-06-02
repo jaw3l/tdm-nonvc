@@ -1,0 +1,12 @@
+name: PR Build
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    uses: ./.github/workflows/reusable-docker-build.yml
+    with:
+      push: false
+      platforms: "linux/amd64,linux/arm64"
