@@ -45,6 +45,7 @@ fi
 : "${VNC_PORT:=5900}"
 : "${NOVNC_PORT:=8080}"
 : "${LOG_LEVEL:=INFO}"
+: "${VNC_PASSWORD:=}"
 
 wait_for_novnc() {
   sleep 5
@@ -93,8 +94,16 @@ eval "Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH} ${OU
 # Start FluxBox window manager
 eval "fluxbox ${OUTPUT_REDIRECT} &"
 
-# Start VNC server
-eval "x11vnc -xkb -forever -nopw -display :0 -listen localhost ${OUTPUT_REDIRECT} &"
+# Start VNC server with or without password
+if [ -n "$VNC_PASSWORD" ]; then
+  log "Starting VNC server with password protection"
+  mkdir -p /root/.vnc
+  x11vnc -storepasswd "$VNC_PASSWORD" /root/.vnc/passwd >/dev/null 2>&1
+  eval "x11vnc -xkb -forever -rfbauth /root/.vnc/passwd -display :0 -listen localhost ${OUTPUT_REDIRECT} &"
+else
+  log "Starting VNC server without password"
+  eval "x11vnc -xkb -forever -nopw -display :0 -listen localhost ${OUTPUT_REDIRECT} &"
+fi
 
 # Start noVNC
 eval "/usr/share/novnc/utils/novnc_proxy --vnc localhost:${VNC_PORT} --listen ${NOVNC_PORT} --web /usr/share/novnc --file-only ${OUTPUT_REDIRECT} &"
