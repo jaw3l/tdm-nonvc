@@ -5,6 +5,8 @@ services:
     #     - NOVNC_VERSION=latest
     #   context: ./
     #   dockerfile: ./docker/Dockerfile
+    #   tags:
+    #     - "pr-62"
     image: ghcr.io/jaw3l/tdm-nonvc:latest
     container_name: twitch_drop_miner
     restart: unless-stopped
@@ -18,4 +20,5 @@ services:
       - DISPLAY_DEPTH=16
       - NOVNC_PORT=8080
       - LOG_LEVEL=CALL
-      #- TZ=America/New_York
+      # - TZ=America/New_York
+      # - VNC_PASSWORD=
