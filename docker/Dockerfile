@@ -20,6 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
   python3-dev \
   libcairo2-dev \
   build-essential \
+  fonts-wqy-zenhei \
   libappindicator3-dev \
   fonts-noto-color-emoji \
   libgirepository1.0-dev \
